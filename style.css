@@ -1,0 +1,200 @@
+:root {
+    --accent: #990033;       /* Темніший, насичений червоний */
+    --accent-glow: #ff0055;  /* Світліший червоний лише для ефекту сяйва */
+    --dark-blue: #003366;    /* Тьмяний синій (Deep Navy) */
+    --cyan-dim: #008b8b;     /* Приглушений бірюзовий для глітча */
+    --glass: rgba(255, 255, 255, 0.05);
+}
+
+
+body {
+    background-color: #05050a;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* ФОН: ЯПОНСЬКА МАТРИЦЯ */
+.jp-matrix {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    font-size: 20px;
+    color: rgba(1, 123, 209, 0.377);
+    z-index: -1;
+    pointer-events: none; /* Щоб можна було клікати на кнопку крізь фон */
+}
+
+.jp-matrix span {
+    user-select: none;
+    animation: smooth-pulse 4s ease-in-out infinite;
+}
+
+/* Різна швидкість миготіння для спанів */
+.jp-matrix span:nth-child(2n) { animation-delay: 1s; }
+.jp-matrix span:nth-child(3n) { animation-delay: 2s; }
+
+@keyframes smooth-pulse {
+    0%, 100% { opacity: 0.2; color: rgba(0, 149, 255, 0.514); transform: scale(1); }
+    50% { opacity: 1; color: var(--accent); text-shadow: 0 0 10px var(--accent); transform: scale(1.1); }
+}
+
+/* КАРТКА */
+.glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(202, 63, 63, 0.5);
+    width: 320px;
+    z-index: 10;
+    animation: fadeIn 1.2s ease-out;
+}
+
+
+
+
+
+
+@keyframes glitch-anim {
+    0% { clip-path: inset(10% 0 80% 0); }
+    100% { clip-path: inset(80% 0 10% 0); }
+}
+
+/* ВІДЕО ТА ПІДПИС */
+.cat-section {
+    margin: 20px 0;
+}
+
+#cat-video {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 15px rgba(255, 123, 167, 0.3);
+}
+
+.neko-label {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-top: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* КНОПКА */
+#heart-btn {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+#heart-btn:hover {
+    background: var(--accent);
+    box-shadow: 0 0 20px var(--accent);
+}
+
+/* СЕРДЕЧКА (JS ANIMATION) */
+.heart {
+    position: fixed;
+    color: var(--accent);
+    pointer-events: none;
+    z-index: 100;
+    animation: floatUp 3s linear forwards;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-110vh) scale(1.5) rotate(45deg); opacity: 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.playlist-title {
+    color: var(--dim-blue);
+    font-size: 0.9rem;
+    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.music-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.music-list li {
+    font-size: 0.85rem;
+    color: #888;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(122, 0, 38, 0.2);
+    transition: 0.3s;
+}
+
+.music-list li:hover {
+    color: var(--glow);
+    padding-left: 5px;
+    background: rgba(122, 0, 38, 0.1);
+}
+
+.heart-icon {
+    color: var(--accent);
+    float: right;
+}
+.play-btn {
+  font-family: inherit;
+  border: none;
+  outline: 1px dotted rgb(37, 37, 37);
+  outline-offset: -4px;
+  cursor: pointer;
+  background: hsl(0deg 0% 75%);
+  box-shadow:
+    inset -1px -1px #292929,
+    inset 1px 1px #fff,
+    inset -2px -2px rgb(158, 158, 158),
+    inset 2px 2px #ffffff;
+  font-size: 10px; /* Трохи менше для списку */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  margin-left: 10px;
+  color: #252525;
+  float: right; /* Щоб кнопки були в один ряд справа */
+}
+
+.play-btn:active {
+  box-shadow:
+    inset -1px -1px #fff,
+    inset 1px 1px #292929,
+    inset -2px -2px #ffffff,
+    inset 2px 2px rgb(158, 158, 158);
+}
+
+.music-list li {
+    overflow: hidden; /* Щоб кнопки не вилазили */
+    line-height: 2.5;
+}
